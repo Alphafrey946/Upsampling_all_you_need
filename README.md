@@ -1,7 +1,8 @@
-## Upsampling is all you need
+## Make CNN make shift invarant
 
 CS766 Final Project
 
+[Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md)
 -------------------------
 # Introduction 
 Convolutional neural networks (CNNs) are a type of artificial neural network that are designed to process data with a grid-like topology, such as images or videos. They are inspired by the structure of the visual cortex in the brain and are designed to automatically learn and identify features in images.  
