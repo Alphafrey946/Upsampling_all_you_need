@@ -120,30 +120,36 @@ To evaluate the performance of the discussed methods and our proposed method, we
 
 1.) 
 <div style="display:flex;flex-direction:row">
-    <img src="https://user-images.githubusercontent.com/17801859/235776110-d1ba35e0-cef8-45ac-a8fc-933682ef0c9c.png" width="250" />
-    <img src="https://user-images.githubusercontent.com/17801859/235776104-0c3aa47c-20f1-4ef9-9ede-0e5373357224.png" width="250" />
+    <img src="https://user-images.githubusercontent.com/17801859/235798417-43f23e5a-f6d6-48a7-9f4c-7ebf9f9f7622.png" width="250" />
+    <img src="https://user-images.githubusercontent.com/17801859/235798438-95317bfa-730c-4cdd-9098-c1753a918861.png" width="250" />
 </div> 
 
 We selected a frog image pair from the CIFAR-10 dataset to evaluate the performance of our network. The left image is the original, non-shifted image, and the right image is shifted by some pixels. 
 
 <div style="display:flex;flex-direction:row">
-    <img src="https://user-images.githubusercontent.com/17801859/235776108-149ffdc4-fdf3-43ba-8a2f-b96ec29f7256.png" width="250" />
-    <img src="https://user-images.githubusercontent.com/17801859/235776107-03e9d23f-103a-4ff9-88ce-cd33879c02c7.png" width="250" />
+
+    <img src="https://user-images.githubusercontent.com/17801859/235798533-8b69b397-47ab-4308-8f17-050e049d4ba6.png" width="250" />
+
+    <img src="https://user-images.githubusercontent.com/17801859/235798573-e2007336-9577-42cd-937b-6f560f2305ec.png" width="250" />
+  
+  
 </div> 
 
 After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image.
 
 2.) 
 <div style="display:flex;flex-direction:row">
-   <img src="https://user-images.githubusercontent.com/17801859/235778171-c7f40060-c764-45ea-8943-89e49914957a.png" width="250" />
-   <img src="https://user-images.githubusercontent.com/17801859/235778170-e4540787-ccaf-4a54-ac61-577ae9e98316.png" width="250" />
+  
+   <img src="https://user-images.githubusercontent.com/17801859/235796860-d17669dd-22ed-472a-add1-6851eb35dadf.png" width="250" />
+
+   <img src="https://user-images.githubusercontent.com/17801859/235797398-54b33399-8a17-41fe-b718-95f83ff2a08c.png" width="250" />
 </div> 
 
 The above pictures are from CIFAR 10 dataset of a ship. The left image is non shifted and right one is shifted image. We used these two images to test our network. Below we represent the bar chart for probability for first 5 classes.
 
 <div style="display:flex;flex-direction:row">
-   <img src="https://user-images.githubusercontent.com/17801859/235778173-e067940d-9105-4fea-86cc-37d06a554491.png" width="250" />
-   <img src="https://user-images.githubusercontent.com/17801859/235778167-4f270326-fe62-4b4a-999c-4c302e084951.png" width="250" />
+   <img src="https://user-images.githubusercontent.com/17801859/235796854-bc8a2145-1856-4199-b8fc-6d6ef8e09c97.png" width="250" />
+   <img src="https://user-images.githubusercontent.com/17801859/235796857-cfcfee47-24fb-49a7-9c39-e7141393c556.png" width="250" />
 </div> 
 
 For the non shifted image, the network classified it as ship with high probability, as evident from the bar chart. Similarly, for the shifted image, the network also classified it as boat with slightly lower probability. These results suggest that our network is able to maintain consistency in its predictions for both non-shifted and shifted images of boats.
