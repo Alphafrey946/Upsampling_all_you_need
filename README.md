@@ -183,6 +183,8 @@ Our proposed solution, which involved upsampling with Nearest Neighbor interpola
 
 4.) The project presentation recording could be found by clicking on the following link. [Presentation recording](https://drive.google.com/file/d/1WBMDK910zpT2kVOaeX9stvRR4nzRQbt1/view?usp=sharing)
 
+5.) The instructions to run the code can be found by clicking on the following link. [Instruction on running code](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_intruction.md)
+
 -------------------------
 # Reference 
 1.) Zhang, Richard. "Making Convolutional Networks Shift-Invariant Again." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 14205-14214.
