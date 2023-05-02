@@ -125,15 +125,12 @@ To evaluate the performance of the discussed methods and our proposed method, we
 </div> 
 
 We selected a frog image pair from the CIFAR-10 dataset to evaluate the performance of our network. The left image is the original, non-shifted image, and the right image is shifted by some pixels. 
-
 <div style="display:flex;flex-direction:row">
-
     <img src="https://user-images.githubusercontent.com/17801859/235798533-8b69b397-47ab-4308-8f17-050e049d4ba6.png" width="250" />
-
     <img src="https://user-images.githubusercontent.com/17801859/235798573-e2007336-9577-42cd-937b-6f560f2305ec.png" width="250" />
-  
-  
 </div> 
+
+
 
 After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image.
 
