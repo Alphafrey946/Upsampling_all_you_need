@@ -76,7 +76,7 @@ By utilizing the adaptive sampling grid, the above scenario of a one-dimensional
 
 # Approach
 
-Our proposed solution builds upon the CNN with Low Pass Filter (LPF) by adding an upsampling layer after LPF and before downsampling. The purpose of the upsampling layer is to increase the output sampling rate to allow for additional content that may be introduced by subsequent layers. In our project, we experimented with two different upsampling methods: nearest neighbor and bilinear interpolation.
+Our proposed solution builds upon the CNN with Low Pass Filter (LPF) by adding an upsampling layer after LPF and before downsampling. The purpose of the upsampling layer is to increase the output sampling rate to allow for additional content that may be introduced by subsequent layers. In our project, we experimented with two different upsampling methods: Nearest Neighbor (NN) and Bilinear Interpolation (BI).
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235756743-d0b94034-309f-47b0-9b55-f61653f6f6c0.png" alt="sq_shifted" width="450"/>
   <br>
@@ -105,13 +105,13 @@ Consistency is a measure of the likelihood of assigning a non-shifted image and 
 
 ## Accuracy
 
-Should define here.
+Accuracy is the proportion of correctly classified images out of the total number of images in the test set
 
 ## Performance comparision across all methods
 
 To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet 18 architecture with circular padding on the CIFAR 10 dataset. The results of these experiments are summarized in the table below.
 
-|  | Low Pass Filter| Adpative LPF | APS | Upsampling with Bilinear Interpolation | Upsampling with NN |
+|  | Low Pass Filter| Adpative LPF | APS | Upsampling with BI | Upsampling with NN |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | Accuracy | .94 | .93 | .942 | .933 | .934 |
 | Consistency | .968 | .973 | 1 | .968 | .984 |
@@ -120,12 +120,22 @@ To evaluate the performance of the discussed methods and our proposed method, we
 -------------------------
 # Dicussion
 
+Our proposed solution, which involved upsampling with Nearest Neighbor interpolation, showed better consistency compared to two of the three prior works. However, the current state-of-the-art solution, APS, still had the best consistency among all methods.
+
 
 -------------------------
 # Challenges faced
 
+1.) We encountered some initial challenges in training both the baseline methods and our proposed model due to limited access to computing resources.
+
+2.) 
+
 -------------------------
 # Future works
+
+1.) Provide a theoretical explanation for the slightly lower accuracy of the proposed model compared to other methods.
+
+2.) We want to compare methods on the dataset which has more images and larger images like ImageNet and use more layered architecture like ResNet 50. The reason we want to do this is as we expect the boundary artifcats should be more prevalent in larger images.
 
 -------------------------
 # Reference 
