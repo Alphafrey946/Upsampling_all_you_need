@@ -98,6 +98,16 @@ Our proposed method can be easily integrated into existing convolutional neural 
 -------------------------
 
 # Result
+![green_frog_s_001658_shift](https://user-images.githubusercontent.com/17801859/235776104-0c3aa47c-20f1-4ef9-9ede-0e5373357224.png)
+![green_frog_s_001658_bar_shift](https://user-images.githubusercontent.com/17801859/235776107-03e9d23f-103a-4ff9-88ce-cd33879c02c7.png)
+![green_frog_s_001658_bar_unshift](https://user-images.githubusercontent.com/17801859/235776108-149ffdc4-fdf3-43ba-8a2f-b96ec29f7256.png)
+![green_frog_s_001658](https://user-images.githubusercontent.com/17801859/235776110-d1ba35e0-cef8-45ac-a8fc-933682ef0c9c.png)
+
+![hydrofoil_s_000078_bar_shift](https://user-images.githubusercontent.com/17801859/235778167-4f270326-fe62-4b4a-999c-4c302e084951.png)
+![hydrofoil_s_000078_shift](https://user-images.githubusercontent.com/17801859/235778170-e4540787-ccaf-4a54-ac61-577ae9e98316.png)
+![hydrofoil_s_000078](https://user-images.githubusercontent.com/17801859/235778171-c7f40060-c764-45ea-8943-89e49914957a.png)
+![hydrofoil_s_000078_bar](https://user-images.githubusercontent.com/17801859/235778173-e067940d-9105-4fea-86cc-37d06a554491.png)
+
 
 ## Consistency 
 
