@@ -1,4 +1,4 @@
-## Make CNN make shift invarant
+## Make CNN make shift invariant
 
 CS766 Final Project
 
