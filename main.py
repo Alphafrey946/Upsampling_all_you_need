@@ -309,6 +309,8 @@ def main():
     
     if str.endswith(ARCH, 'lpf'):
         from model_classes.lpf_models.resnet import resnet18_lpf, resnet34_lpf, resnet50_lpf, resnet20_lpf, resnet56_lpf
+    elif str.endswith(ARCH, 'lpf_up'):
+        from model_classes.lpf_models_up.resnet import resnet18_lpf, resnet34_lpf, resnet50_lpf, resnet20_lpf, resnet56_lpf
 
     elif str.endswith(ARCH, 'aps'):
         from model_classes.aps_models.resnet import resnet18_aps, resnet34_aps, resnet50_aps, resnet20_aps, resnet56_aps
@@ -317,7 +319,7 @@ def main():
         
         
     else:
-        from model_classes.vanila_models.resnet import resnet18, resnet34, resnet50, resnet20, resnet56
+        from model_classes.pasa_models.resnet import resnet18, resnet34, resnet50, resnet20, resnet56
 
     
 
