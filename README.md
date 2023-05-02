@@ -169,6 +169,18 @@ Our proposed solution, which involved upsampling with Nearest Neighbor interpola
 2.) We want to compare methods on the dataset which has more images and larger images like ImageNet and use more layered architecture like ResNet 50. The reason we want to do this is as we expect the boundary artifcats should be more prevalent in larger images.
 
 -------------------------
+# Class deliverables
+
+1.) The project proposal could be found by clicking on the following link. [Project proposal](https://drive.google.com/file/d/1uNCe8zOJ3sSWu-LG3V0Ot3WgRjH5Tw0V/view?usp=sharing)
+
+
+2.) The project mid term report could be found by clicking on the following link. [Mid term report](https://drive.google.com/file/d/1TROvKINgR0lLnnQJUksYtUtOmDQnrUff/view?usp=sharing)
+
+3.) The project presentation could be found by clicking on the following link. [Final presentation](https://docs.google.com/presentation/d/1NkO1_GMun3ILqAEmkdj53oYfS9osN3-14Zuc3VnSx_U/edit?usp=sharing)
+
+4.) The project presentation recording could be found by clicking on the following link. [Presentation recording](https://drive.google.com/file/d/1WBMDK910zpT2kVOaeX9stvRR4nzRQbt1/view?usp=sharing)
+
+-------------------------
 # Reference 
 1.) Zhang, Richard. "Making Convolutional Networks Shift-Invariant Again." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 14205-14214.
 
