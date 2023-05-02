@@ -15,4 +15,8 @@ Vadidation would be performed after training.
 Jupyter notebook `demo.ipynb` is notebook demo for visulization of shift images and the changes in classificaiton.  
 
 ---
-
+# Pretrained weight
+Trained with CIFAR-10 with Resnet18. 
+|  | Low Pass Filter| Adpative LPF | APS | Upsampling with BI | Upsampling with NN |
+| -------- | -------- | -------- | -------- | -------- | -------- |
+| Weight link |[LPF](https://uwprod-my.sharepoint.com/:u:/g/personal/ydou8_wisc_edu/Ee1AACW51QtLs8MnPNXMTugBaQ-E1606xVdO31fujP7tKA?e=vhCOwc)| [Adaptive](https://uwprod-my.sharepoint.com/:u:/g/personal/ydou8_wisc_edu/EdKgEwSHHaZPvQtPNlejs8wBqjW69T5lO603YZwBQhcw9Q?e=u4S7jS) | [APS](https://uwprod-my.sharepoint.com/:u:/g/personal/ydou8_wisc_edu/ER8uLmSYCgVHvISEwRtr9i8BV8KdYC38cuawmh-_p-szTw?e=M1gxX9) | [BI](https://uwprod-my.sharepoint.com/:u:/g/personal/ydou8_wisc_edu/EZJbRwRf6f1ClYg2hxmhwFMBeR7sNrT3Xitr-zFs2Me6wA?e=GeqJjZ) | [NN](https://uwprod-my.sharepoint.com/:u:/g/personal/ydou8_wisc_edu/EfFd8bdKaSVIp7e2IpD1p4oBQIZAaAFdUS_2K9MXLMX2wA?e=0HGtar) |
