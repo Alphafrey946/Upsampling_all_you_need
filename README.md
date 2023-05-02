@@ -39,7 +39,7 @@ The first proposed solution to the problem of shift variance in CNNs involved in
 
 ## Low pass filter (LPF)
 
-This proposed solution added a low pass filter layer before the downsampling layer, using a Gaussian filter to achieve this.
+This proposed solution added a low pass filter layer before the downsampling layer, using a Gaussian filter to achieve this[1].
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235751982-2f6a25a9-173e-4df3-8fa1-0bcd418379d8.png" alt="sq_shifted" width="300"/>
@@ -51,7 +51,7 @@ The approach had a limitation in that it blurred certain desired high-frequency 
 
 ## Adaptive low pass filter 
 
-This method overcomes the limitations of the previous approach by utilizing an adaptive low-pass filter. The CNN predicts the weight of the Gaussian filter based on the spatial locations and channels in the image, resulting in a more precise and efficient approach.
+This method overcomes the limitations of the previous approach by utilizing an adaptive low-pass filter [2]. The CNN predicts the weight of the Gaussian filter based on the spatial locations and channels in the image, resulting in a more precise and efficient approach.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235753048-45bdf350-ca03-4229-a891-829006d4cc49.png" alt="sq_shifted" width="300"/>
   <br>
@@ -62,12 +62,12 @@ In the example above, we observe that this approach allows us to maintain the de
 
 ## Adaptive polyphase sampling (APS)
  
-The current state-of-the-art solution to the shift variance problem involves adaptive sampling grid selection to ensure that the same pixels are selected regardless of any shifts in the input images.
+The current state-of-the-art solution to the shift variance problem involves adaptive sampling grid selection to ensure that the same pixels are selected regardless of any shifts in the input images [3].
 
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235754515-d6cbb2ef-4d1b-4573-8158-87cf2e34be44.png" alt="sq_shifted" width="450"/>
   <br>
-  <em>[Need to cite here]</em>
+  <em>[Chaman, 2021]</em>
 </p>
 
 By utilizing the adaptive sampling grid, the above scenario of a one-dimensional signal shows that we are able to recover the same signal even in the case of non-shifted signals.
@@ -101,18 +101,42 @@ Our proposed method can be easily integrated into existing convolutional neural 
 
 ## Consistency 
 
-Should define here.
+Consistency is a measure of the likelihood of assigning a non-shifted image and its corresponding shifted image to the same class.
 
 ## Accuracy
 
 Should define here.
+
+## Performance comparision across all methods
+
+To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet 18 architecture with circular padding on the CIFAR 10 dataset. The results of these experiments are summarized in the table below.
+
+|  | Low Pass Filter| Adpative LPF | APS | Upsampling with Bilinear Interpolation | Upsampling with NN |
+| -------- | -------- | -------- | -------- | -------- | -------- |
+| Accuracy | .94 | .93 | .942 | .933 | .934 |
+| Consistency | .968 | .973 | 1 | .968 | .984 |
+
 
 -------------------------
 # Dicussion
 
 
 -------------------------
-# Problems
+# Challenges faced
+
+-------------------------
+# Future works
 
 -------------------------
 # Reference 
+1.) Zhang, Richard. "Making Convolutional Networks Shift-Invariant Again." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 14205-14214.
+
+2.) Zou, Xueyan, et al. "Delving Deeper into Anti-Aliasing in ConvNets." Proceedings of the IEEE International Conference on Computer Vision, 2022, pp 1-15.
+
+3.) Chaman, Anadi, and Ivan Dokmanic. “Truly Shift Invariant Convolutional Neural Networks.”2021IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
+
+4.) Sharifzadeh, Mostafa,et al. “Investigating Shift-Variance of Convolutional Neural Networks in Ultrasound Image Segmentation”, IEEE IUS, 2021.
+
+5.) Proakis, John G. Digital Signal Processing. Pearson, 2013.
+
+
