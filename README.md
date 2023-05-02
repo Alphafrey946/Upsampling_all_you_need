@@ -5,7 +5,7 @@ CS766 Final Project
 -------------------------
 # Introduction 
 Convolutional neural networks (CNNs) are a type of artificial neural network that are designed to process data with a grid-like topology, such as images or videos. They are inspired by the structure of the visual cortex in the brain and are designed to automatically learn and identify features in images.  
-One of the main challenges with CNNs is their lack of shift invariance property. This property becomes critical in high stake and crucual tasks.
+One of the main challenges with CNNs is their lack of shift invariance property. This property becomes critical in high stake and crucial tasks.
 
 -------------------------
 
@@ -98,16 +98,6 @@ Our proposed method can be easily integrated into existing convolutional neural 
 -------------------------
 
 # Result
-![green_frog_s_001658_shift](https://user-images.githubusercontent.com/17801859/235776104-0c3aa47c-20f1-4ef9-9ede-0e5373357224.png)
-![green_frog_s_001658_bar_shift](https://user-images.githubusercontent.com/17801859/235776107-03e9d23f-103a-4ff9-88ce-cd33879c02c7.png)
-![green_frog_s_001658_bar_unshift](https://user-images.githubusercontent.com/17801859/235776108-149ffdc4-fdf3-43ba-8a2f-b96ec29f7256.png)
-![green_frog_s_001658](https://user-images.githubusercontent.com/17801859/235776110-d1ba35e0-cef8-45ac-a8fc-933682ef0c9c.png)
-
-![hydrofoil_s_000078_bar_shift](https://user-images.githubusercontent.com/17801859/235778167-4f270326-fe62-4b4a-999c-4c302e084951.png)
-![hydrofoil_s_000078_shift](https://user-images.githubusercontent.com/17801859/235778170-e4540787-ccaf-4a54-ac61-577ae9e98316.png)
-![hydrofoil_s_000078](https://user-images.githubusercontent.com/17801859/235778171-c7f40060-c764-45ea-8943-89e49914957a.png)
-![hydrofoil_s_000078_bar](https://user-images.githubusercontent.com/17801859/235778173-e067940d-9105-4fea-86cc-37d06a554491.png)
-
 
 ## Consistency 
 
@@ -126,6 +116,37 @@ To evaluate the performance of the discussed methods and our proposed method, we
 | Accuracy | .94 | .93 | .942 | .933 | .934 |
 | Consistency | .968 | .973 | 1 | .968 | .984 |
 
+## Shift Invariance Test Results
+
+1.) 
+<div style="display:flex;flex-direction:row">
+    <img src="https://user-images.githubusercontent.com/17801859/235776110-d1ba35e0-cef8-45ac-a8fc-933682ef0c9c.png" width="250" />
+    <img src="https://user-images.githubusercontent.com/17801859/235776104-0c3aa47c-20f1-4ef9-9ede-0e5373357224.png" width="250" />
+</div> 
+
+We selected a frog image pair from the CIFAR-10 dataset to evaluate the performance of our network. The left image is the original, non-shifted image, and the right image is shifted by some pixels. 
+
+<div style="display:flex;flex-direction:row">
+    <img src="https://user-images.githubusercontent.com/17801859/235776108-149ffdc4-fdf3-43ba-8a2f-b96ec29f7256.png" width="250" />
+    <img src="https://user-images.githubusercontent.com/17801859/235776107-03e9d23f-103a-4ff9-88ce-cd33879c02c7.png" width="250" />
+</div> 
+
+After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image.
+
+2.) 
+<div style="display:flex;flex-direction:row">
+   <img src="https://user-images.githubusercontent.com/17801859/235778171-c7f40060-c764-45ea-8943-89e49914957a.png" width="250" />
+   <img src="https://user-images.githubusercontent.com/17801859/235778170-e4540787-ccaf-4a54-ac61-577ae9e98316.png" width="250" />
+</div> 
+
+The above pictures are from CIFAR 10 dataset of a ship. The left image is non shifted and right one is shifted image. We used these two images to test our network. Below we represent the bar chart for probability for first 5 classes.
+
+<div style="display:flex;flex-direction:row">
+   <img src="https://user-images.githubusercontent.com/17801859/235778173-e067940d-9105-4fea-86cc-37d06a554491.png" width="250" />
+   <img src="https://user-images.githubusercontent.com/17801859/235778167-4f270326-fe62-4b4a-999c-4c302e084951.png" width="250" />
+</div> 
+
+For the non shifted image, the network classified it as ship with high probability, as evident from the bar chart. Similarly, for the shifted image, the network also classified it as boat with slightly lower probability. These results suggest that our network is able to maintain consistency in its predictions for both non-shifted and shifted images of boats.
 
 -------------------------
 # Dicussion
