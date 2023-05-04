@@ -27,9 +27,18 @@ Shown above are two images of a squirrel: the image on the left is a non-shifted
     <img src="https://user-images.githubusercontent.com/55200955/235745156-59f04fe3-12d7-4d80-992c-59daa2090ae8.png" width="220" />
   <br>
   <em>[Xueyan, 2020]</em>
+
 </div>  
 
 As shown in the left bar chart, the classifier identified the non-shifted image with a high probability as a squirrel, while for the slightly shifted image (as depicted in the right bar chart), it classified it as a dog.  
+
+Above was a simple image classfier. Now, we can consider an application which does medical image segementation. 
+
+ <p align="center">
+  <img src="https://user-images.githubusercontent.com/55200955/236338089-a358f8b6-bcae-4b0c-b1e7-5e6fa07edbcb.png" alt="ultrasoundimg" width="250"/>
+</p>
+
+Above, we can see that slightly shifted ultrasound images produced different results. Hence, it becomes matter of concern in high stake applications. 
 
 In these tasks, precise object localization is critical for accurate diagnosis, navigation, and identification, and the shift invariance property of CNNs allows them to recognize objects regardless of their position or orientation in an image. Examples of such applications include the detection and segmentation of tumors in medical images, the detection and classification of objects such as cars and pedestrians in autonomous driving scenarios, and facial recognition and object tracking in surveillance and security settings.  
 
