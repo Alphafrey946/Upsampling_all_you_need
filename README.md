@@ -237,6 +237,8 @@ Jupyter notebook demo:
 
 Our proposed solution, which involved upsampling with Nearest Neighbor interpolation, showed better consistency compared to two of the three prior works. However, the current state-of-the-art solution, APS, still had the best consistency among all methods.
 
+Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method does not exhibit this issue. Additionally, the adaptive LPF method introduces extra learnable parameters to the network, leading to increased training time and a more complex network. However, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to these two works. Furthermore, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
+
 
 -------------------------
 # Challenges faced
