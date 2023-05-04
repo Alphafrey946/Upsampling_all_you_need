@@ -96,6 +96,8 @@ Our proposed method can be easily integrated into existing convolutional neural 
 
 # Implementation
 ## Upsampling + Anti-aliasing to improve shift-equivariance
+
+We use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
 -------------------------
 
 # Result
