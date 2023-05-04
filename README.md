@@ -13,15 +13,20 @@ One of the main challenges with CNNs is their lack of shift invariance property.
 # Motivation
 
 As previously mentioned, the shift variance exhibited by CNNs can pose a significant challenge in high-stakes classification tasks, including medical imaging analysis, object detection in autonomous driving, and surveillance and security applications. This is because even a slight shift in input images can result in drastic changes in the output of the network.  
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/17801859/235743412-8c0e3081-d08a-4497-af28-77486be3e2bb.gif" alt="sq_shifted" width="200"/>
+<div style="display:flex;flex-direction:row">
+    <img src="https://user-images.githubusercontent.com/55200955/236336470-eece43a5-c662-48e4-a7da-a58ec75122a6.png" width="200" />
+    <img src="https://user-images.githubusercontent.com/55200955/236336483-3cd186ef-d32c-4d73-89ef-753200cae08b.png" width="200" />
+    <img src="https://user-images.githubusercontent.com/17801859/235743412-8c0e3081-d08a-4497-af28-77486be3e2bb.gif" alt="sq_shifted" width="200"/>
   <br>
   <em>[Xueyan, 2020]</em>
-</p>
-Above, we can observe two images of a squirrel, one of which is slightly shifted compared to the other. If we apply a CNN classifier to these images, it will produce the following results.
+</div> 
+
+Shown above are two images of a squirrel: the image on the left is a non-shifted image, while the image on the right is slightly shifted. The rightmost picture is a GIF that shows the two images. If we apply a CNN classifier to these images, it will produce different results, depending on whether the image is shifted or not.
 <div style="display:flex;flex-direction:row">
     <img src="https://user-images.githubusercontent.com/55200955/235745127-abcf3404-ec8f-4d9c-b25a-434290794992.png" width="200" />
     <img src="https://user-images.githubusercontent.com/55200955/235745156-59f04fe3-12d7-4d80-992c-59daa2090ae8.png" width="220" />
+  <br>
+  <em>[Xueyan, 2020]</em>
 </div>  
 
 As shown in the left bar chart, the classifier identified the non-shifted image with a high probability as a squirrel, while for the slightly shifted image (as depicted in the right bar chart), it classified it as a dog.  
