@@ -239,6 +239,10 @@ Our proposed solution, which involved upsampling with Nearest Neighbor interpola
 
 Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method does not exhibit this issue. Additionally, the adaptive LPF method introduces extra learnable parameters to the network, leading to increased training time and a more complex network. However, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to these two works. Furthermore, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
 
+In theory, we expect that our approach should be as robust as the APS method. However, the use of circular padding for generating the shifted images may introduce boundary effects. To address this issue, we use interpolation, which we hope would be able to alleviate the effect. By doing so, we aim to ensure that our approach can provide high-quality results even in the presence of shifted images. However, after running experiments our method has slightly less consistency as compared to APS.
+
+Our results show that our proposed methods had slightly lower accuracy compared to other methods. While this finding is important, further investigation is needed to identify the specific reasons for this difference in performance. It is possible that the use of Nearest Neighbor interpolation for upsampling could lead to some loss of information, or that our approach may be more sensitive to certain types of noise or distortions. We plan to explore these factors in future work to better understand the limitations of our approach and identify opportunities for further improvement.
+
 
 -------------------------
 # Challenges faced
