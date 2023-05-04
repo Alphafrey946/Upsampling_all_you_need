@@ -95,7 +95,7 @@ Our proposed method can be easily integrated into existing convolutional neural 
 -------------------------
 
 # Implementation
-
+## Upsampling + Anti-aliasing to improve shift-equivariance
 -------------------------
 
 # Result
