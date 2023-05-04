@@ -171,7 +171,7 @@ And for BI
             return m(gauss)
 ```
 
-We use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
+Like prior works, our methods could be added to any downsampling task. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weight for all 5 methods. We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model, or default setting in `main.py`. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
 
 -------------------------
 
