@@ -62,7 +62,7 @@ This proposed solution added a low pass filter layer before the downsampling lay
   <em>[Xueyan, 2020]</em>
 </p>
 
-The approach had a limitation in that it blurred certain desired high-frequency content such as edges. The issue can be observed in the above picture as well.
+The approach had a limitation in that it blurred certain desired high-frequency content such as edges since the kernel size is fixed. The issue can be observed in the above picture as well.
 
 ## Adaptive low pass filter 
 
@@ -103,6 +103,7 @@ Our proposed solution builds upon the CNN with Low Pass Filter (LPF) by adding a
   <em>Flow for our proposed solution</em>
 </p>
 
+The reason behind our method is by leaking some position information with upsampling, and hope the network could "pick up" those clues.  
 
 Our proposed method can be easily integrated into existing convolutional neural networks, similar to previous works in this area.
 
@@ -111,8 +112,9 @@ Our proposed method can be easily integrated into existing convolutional neural 
 # Implementation
 ## Upsampling + Anti-aliasing to improve shift-equivariance
 
-Below is the implementation for BluePool by [Zhang, 2020], as indicated above.
-```class BlurPool(nn.Module):
+Below is the implementation for BluePool by [Zhang, 2020].
+```
+class BlurPool(nn.Module):
     def __init__(self, channels, pad_type='reflect', filt_size=4, stride=2, pad_off=0, circular_flag = False):
         super(BlurPool, self).__init__()
         self.filt_size = filt_size
@@ -171,7 +173,7 @@ Following our proposed method abrove, we implemented our methods NN as follows:
             m = nn.UpsamplingNearest2d(scale_factor=2)
             return m(gauss)
 ```
-And for BI
+And for BI,
 ```
     def forward(self, inp):
         if(self.filt_size==1):
@@ -185,7 +187,7 @@ And for BI
             return m(gauss)
 ```
 
-Like prior works, our methods could be added to any downsampling task. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weight for all 5 methods. 
+Like prior works, our methods could be added to any downsampling tasks. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weights for all 5 methods. 
 
 We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model as the default setting in `main.py`. We used CIFAR-10 for our training dataset. For CIFAR-10, a split of 0.9/0.1 to training/validation is used over the 50k training set with the 10k test dataset. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
 
@@ -195,7 +197,7 @@ We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our
 
 ## Consistency 
 
-Consistency is a measure of the likelihood of assigning a non-shifted image and its corresponding shifted image to the same class.
+Consistency is a measure of the likelihood of assigning a non-shifted image and its corresponding shifted image to the same class. 1 means the network predicts the shifted images as the same class as the unshifted counterpart. 
 
 ## Accuracy
 
@@ -203,9 +205,9 @@ Accuracy is the proportion of correctly classified images out of the total numbe
 
 ## Performance comparision across all methods
 
-To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet 18 architecture with circular padding on the CIFAR 10 dataset. The results of these experiments are summarized in the table below.
+To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet18 architecture with circular padding on the CIFAR 10 dataset. We compared our implementation with LPF [Zhang, 2020],  Adpative LPF [Zou, 2020], and APS [Chaman and Dokmanic, 2021]. The results of these experiments are summarized in the table below. The accuracy here is reported as top 5 (5 highest probability class predited by network for each image). 
 
-|  | Low Pass Filter| Adpative LPF | APS | Upsampling with BI | Upsampling with NN |
+|  | LPF | Adpative LPF | APS | Upsampling with BI | Upsampling with NN |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | Accuracy | .94 | .93 | .942 | .933 | .934 |
 | Consistency | .968 | .973 | 1 | .968 | .984 |
@@ -218,7 +220,7 @@ To evaluate the performance of the discussed methods and our proposed method, we
     <img src="https://user-images.githubusercontent.com/17801859/235798438-95317bfa-730c-4cdd-9098-c1753a918861.png" width="250" />
 </div> 
 
-We selected a frog image pair from the CIFAR-10 dataset to evaluate the performance of our network. The left image is the original, non-shifted image, and the right image is shifted by some pixels. 
+We selected a frog image pair from the CIFAR-10 dataset to evaluate the performance of our network. The left image is the original, non-shifted image, and the right image is shifted randomly within 3 pixels by `np.random.randint(-3, 3, 2)`. 
 <div style="display:flex;flex-direction:row">
     <img src="https://user-images.githubusercontent.com/17801859/235798533-8b69b397-47ab-4308-8f17-050e049d4ba6.png" width="250" />
     <img src="https://user-images.githubusercontent.com/17801859/235798573-e2007336-9577-42cd-937b-6f560f2305ec.png" width="250" />
@@ -226,7 +228,7 @@ We selected a frog image pair from the CIFAR-10 dataset to evaluate the performa
 
 
 
-After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image.
+After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image, but the network could still predict it correctly. 
 
 2.) 
 <div style="display:flex;flex-direction:row">
@@ -253,28 +255,28 @@ Jupyter notebook demo:
 
 Our proposed solution, which involved upsampling with Nearest Neighbor interpolation, showed better consistency compared to two of the three prior works. However, the current state-of-the-art solution, APS, still had the best consistency among all methods.
 
-Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method does not exhibit this issue. Additionally, the adaptive LPF method introduces extra learnable parameters to the network, leading to increased training time and a more complex network. However, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to these two works. Furthermore, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
+Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method could help to reduce such issue. Also, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to these two works. Compare to the the adaptive LPF method which introduces extra learnable parameters to the network, leading to increased training time and a more complex network. In contrast, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
 
-In theory, we expect that our approach should be as robust as the APS method. However, the use of circular padding for generating the shifted images may introduce boundary effects. To address this issue, we use interpolation, which we hope would be able to alleviate the effect. By doing so, we aim to ensure that our approach can provide high-quality results even in the presence of shifted images. However, after running experiments our method has slightly less consistency as compared to APS.
+In theory, we expect that our approach should be as robust as the APS method. Since the use of circular padding for generating the shifted images may introduce boundary effects. By utilizing interpolation, we hope would be able to alleviate such effect. By doing so, we aim to ensure that our approach can provide high-quality results even in the presence of shifted images. However, after running experiments our method has slightly less consistency as compared to APS.
 
-Our results show that our proposed methods had slightly lower accuracy compared to other methods. While this finding is important, further investigation is needed to identify the specific reasons for this difference in performance. It is possible that the use of Nearest Neighbor interpolation for upsampling could lead to some loss of information, or that our approach may be more sensitive to certain types of noise or distortions. We plan to explore these factors in future work to better understand the limitations of our approach and identify opportunities for further improvement.
+Our results show that our proposed methods had slightly lower accuracy compared to other methods. While this finding is important, further investigation is needed to identify the specific reasons for this difference in performance. It is possible that the use of Nearest Neighbor interpolation for upsampling may be more sensitive to certain types of noise or distortions. We plan to explore these factors in future work to better understand the limitations of our approach and identify opportunities for further improvement.
 
 
 -------------------------
 # Challenges faced
 
-1.) One of the initial challenges we faced was finding the appropriate hyperparameters for all baseline methods and our proposed method to ensure consistency in performance comparison.
+1.) Limited access to computing resources posed an additional challenge during the training of both the baseline methods and our proposed model, especially if we want to train with larger dataset such as ImageNet.
 
-2.) Limited access to computing resources posed an additional challenge during the training of both the baseline methods and our proposed model.
+2.) We encountered an unexpected challenge when our experiments revealed that Nearest Neighbor outperformed our initial assumption that Bilinear Interpolation would yield better results. This required a detailed analysis to understand the underlying reasons for the outcome.
 
-3.) We encountered an unexpected challenge when our experiments revealed that Nearest Neighbor outperformed our initial assumption that Bilinear Interpolation would yield better results. This required a detailed analysis to understand the underlying reasons for the outcome, adding an extra layer of complexity to the project.
+3.) We still face the issue of the the drop in accuracy comparing to other baseline methods such as LPF.    
 
 -------------------------
 # Future works
 
 1.) Provide a theoretical explanation for the slightly lower accuracy of the proposed model compared to other methods.
 
-2.) We want to compare methods on the dataset which has more images and larger images like ImageNet and use more layered architecture like ResNet 50. The reason we want to do this is as we expect the boundary artifcats should be more prevalent in larger images.
+2.) We want to compare methods on the dataset which has more images and larger images like ImageNet and use more layered architecture like ResNet50. The reason we want to do this is as we expect the boundary artifcats should be more prevalent in larger images.
 
 -------------------------
 # Class deliverables
