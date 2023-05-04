@@ -171,7 +171,9 @@ And for BI
             return m(gauss)
 ```
 
-Like prior works, our methods could be added to any downsampling task. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weight for all 5 methods. We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model, or default setting in `main.py`. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
+Like prior works, our methods could be added to any downsampling task. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weight for all 5 methods. 
+
+We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model as the default setting in `main.py`. We used CIFAR-10 for our training dataset. For CIFAR-10, a split of 0.9/0.1 to training/validation is used over the 50k training set with the 10k test dataset. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
 
 -------------------------
 
@@ -183,7 +185,7 @@ Consistency is a measure of the likelihood of assigning a non-shifted image and 
 
 ## Accuracy
 
-Accuracy is the proportion of correctly classified images out of the total number of images in the test set
+Accuracy is the proportion of correctly classified images out of the total number of images in the test set.
 
 ## Performance comparision across all methods
 
