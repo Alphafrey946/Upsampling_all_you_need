@@ -241,9 +241,11 @@ Our proposed solution, which involved upsampling with Nearest Neighbor interpola
 -------------------------
 # Challenges faced
 
-1.) We encountered some initial challenges in training both the baseline methods and our proposed model due to limited access to computing resources.
+1.) One of the initial challenges we faced was finding the appropriate hyperparameters for all baseline methods and our proposed method to ensure consistency in performance comparison.
 
-2.) 
+2.) Limited access to computing resources posed an additional challenge during the training of both the baseline methods and our proposed model.
+
+3.) We encountered an unexpected challenge when our experiments revealed that Nearest Neighbor outperformed our initial assumption that Bilinear Interpolation would yield better results. This required a detailed analysis to understand the underlying reasons for the outcome, adding an extra layer of complexity to the project.
 
 -------------------------
 # Future works
