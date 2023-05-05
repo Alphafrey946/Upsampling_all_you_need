@@ -1,12 +1,20 @@
 # Dependencies
-Test with
+Test with 
+
 Python 3.8.8
+
 CUDA 11.6
-Pythorch 1.10.2
+
+Pytorch 1.10.2
+
 torchvision 0.11.3
+
 numpy
+
 opencv
+
 seaborn
+
 matplotlib
 
 # Instruction on how to run
