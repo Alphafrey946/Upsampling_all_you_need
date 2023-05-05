@@ -1,11 +1,11 @@
-## Make CNN make shift invariant
+## Make CNN shift invariant
 
-CS766 Final Project
+CS766 Final Project by Yimeng Dou and Kushagra Kapil
 
 [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md)
 -------------------------
 # Introduction 
-Convolutional neural networks (CNNs) are a type of artificial neural network that are designed to process data with a grid-like topology, such as images or videos. They are inspired by the structure of the visual cortex in the brain and are designed to automatically learn and identify features in images.  
+Convolutional neural networks (CNNs) are a type of artificial neural network that are designed to process data with a grid-like topology, such as images or videos. They are inspired by the structure of the visual cortex in the brain and are designed to adaptivel learn and identify  spatial hierarchies of features in images.  
 One of the main challenges with CNNs is their lack of shift invariance property. This property becomes critical in high stake and crucial tasks.
 
 -------------------------
@@ -52,11 +52,11 @@ Therefore, in order to increase the precision and robustness of models, it is cr
 
 ## Data Augementation
 
-The first proposed solution to the problem of shift variance in CNNs involved including shifted images in the training set. However, this approach still suffered from low consistency and accuracy.
+The first proposed solution to the problem of shift variance in CNNs involved including shifted images in the training set. However, this approach still suffered from low consistency and accuracy [Azulay and Weiss, 2019].
 
 ## Low pass filter (LPF)
 
-This proposed solution added a low pass filter layer before the downsampling layer, using a Gaussian filter to achieve this[1].
+This proposed solution added a low pass filter layer before the downsampling layer, using a Gaussian filter to achieve this [Zhang, 2019].
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235751982-2f6a25a9-173e-4df3-8fa1-0bcd418379d8.png" alt="sq_shifted" width="300"/>
@@ -66,9 +66,9 @@ This proposed solution added a low pass filter layer before the downsampling lay
 
 The approach had a limitation in that it blurred certain desired high-frequency content such as edges since the kernel size is fixed. The issue can be observed in the above picture as well.
 
-## Adaptive low pass filter 
+## Adaptive LPF
 
-This method overcomes the limitations of the previous approach by utilizing an adaptive low-pass filter [2]. The CNN predicts the weight of the Gaussian filter based on the spatial locations and channels in the image, resulting in a more precise and efficient approach.
+This method overcomes the limitations of the previous approach by utilizing an adaptive low-pass filter [Xueyan, 2020]. The CNN predicts the weight of the Gaussian filter based on the spatial locations and channels in the image, resulting in a more precise and efficient approach.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235753048-45bdf350-ca03-4229-a891-829006d4cc49.png" alt="sq_shifted" width="300"/>
   <br>
@@ -79,12 +79,12 @@ In the example above, we observe that this approach allows us to maintain the de
 
 ## Adaptive polyphase sampling (APS)
  
-The current state-of-the-art solution to the shift variance problem involves adaptive sampling grid selection to ensure that the same pixels are selected regardless of any shifts in the input images [3].
+The current state-of-the-art solution to the shift variance problem involves adaptive sampling grid selection to ensure that the same pixels are selected regardless of any shifts in the input images  [Chaman and Dokmanic, 2021].
 
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235754515-d6cbb2ef-4d1b-4573-8158-87cf2e34be44.png" alt="sq_shifted" width="450"/>
   <br>
-  <em>[Chaman, 2021]</em>
+  <em>[Chaman and Dokmanic, 2021]</em>
 </p>
 
 By utilizing the adaptive sampling grid, the above scenario of a one-dimensional signal shows that we are able to recover the same signal even in the case of non-shifted signals.
@@ -93,7 +93,7 @@ By utilizing the adaptive sampling grid, the above scenario of a one-dimensional
 
 # Approach
 
-Our proposed solution builds upon the CNN with Low Pass Filter (LPF) by adding an upsampling layer after LPF and before downsampling. The purpose of the upsampling layer is to increase the output sampling rate to allow for additional content that may be introduced by subsequent layers. In our project, we experimented with two different upsampling methods: Nearest Neighbor (NN) and Bilinear Interpolation (BI).
+Our proposed solution builds upon the CNN with LPF by adding an upsampling layer after LPF and before downsampling. The purpose of the upsampling layer is to increase the output sampling rate to allow for additional content that may be introduced by subsequent layers. In our project, we experimented with two different upsampling methods: Nearest Neighbor (NN) and Bilinear Interpolation (BI).
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/235756743-d0b94034-309f-47b0-9b55-f61653f6f6c0.png" alt="sq_shifted" width="450"/>
   <br>
@@ -114,7 +114,7 @@ Our proposed method can be easily integrated into existing convolutional neural 
 # Implementation
 ## Upsampling + Anti-aliasing to improve shift-equivariance
 
-Below is the implementation for BluePool by [Zhang, 2020].
+Below is the implementation for BluePool by [Zhang, 2019].
 ```
 class BlurPool(nn.Module):
     def __init__(self, channels, pad_type='reflect', filt_size=4, stride=2, pad_off=0, circular_flag = False):
@@ -161,6 +161,7 @@ class BlurPool(nn.Module):
         else:
             return F.conv2d(self.pad(inp), self.filt, stride=self.stride, groups=inp.shape[1])
 ```
+
 Following our proposed method abrove, we implemented our methods NN as follows:
 
 ```
@@ -175,7 +176,9 @@ Following our proposed method abrove, we implemented our methods NN as follows:
             m = nn.UpsamplingNearest2d(scale_factor=2)
             return m(gauss)
 ```
+
 And for BI,
+
 ```
     def forward(self, inp):
         if(self.filt_size==1):
@@ -191,7 +194,7 @@ And for BI,
 
 Like prior works, our methods could be added to any downsampling tasks. For this project however, we tested our method with strided-convolution. So, we are using Resnet18 as our backbone, and training both of our method with the implementation above. [Instruction](https://github.com/Alphafrey946/Upsampling_all_you_need/blob/main/README_instruction.md) shows how to training our model. This link also includes training weights for all 5 methods. 
 
-We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model as the default setting in `main.py`. We used CIFAR-10 for our training dataset. For CIFAR-10, a split of 0.9/0.1 to training/validation is used over the 50k training set with the 10k test dataset. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. 
+We used the same hyper-parmeters by [Chaman and Dokmanic, 2021] for training our model as the default setting in `main.py`. We used CIFAR-10 for our training dataset. For CIFAR-10, a split of 0.9/0.1 to training/validation is used over the 50k training set with the 10k test dataset. More specifically for our implemetnation, we use filter size of 3 for LPS and scalling factor of 2 for upsampling. For testing, the test images are shifted randomly within 3 pixels. 
 
 -------------------------
 
@@ -207,7 +210,7 @@ Accuracy is the proportion of correctly classified images out of the total numbe
 
 ## Performance comparision across all methods
 
-To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet18 architecture with circular padding on the CIFAR 10 dataset. We compared our implementation with LPF [Zhang, 2020],  Adpative LPF [Zou, 2020], and APS [Chaman and Dokmanic, 2021]. The results of these experiments are summarized in the table below. The accuracy here is reported as top 5 (5 highest probability class predited by network for each image). 
+To evaluate the performance of the discussed methods and our proposed method, we conducted experiments using the ResNet18 architecture with circular padding on the CIFAR 10 dataset. We compared our implementation with LPF [Zhang, 2019],  Adpative LPF [Zou, 2020], and APS [Chaman and Dokmanic, 2021]. The results of these experiments are summarized in the table below. The accuracy here is reported as top 5 (5 highest probability class predited by network for each image). 
 
 |  | LPF | Adpative LPF | APS | Upsampling with BI | Upsampling with NN |
 | -------- | -------- | -------- | -------- | -------- | -------- |
@@ -229,8 +232,7 @@ We selected a frog image pair from the CIFAR-10 dataset to evaluate the performa
 </div> 
 
 
-
-After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted image, the probability of the frog class decreased slightly compared to the non-shifted image, but the network could still predict it correctly. 
+After feeding the images into our trained network, we generated the probability bar chart shown below for the top five classes. The bar chart reveals that our network classified both the non-shifted and shifted frog images with high probability, correctly identifying the object. However, for the shifted frog image, the probability of the frog class decreased slightly compared to the non-shifted image, but the network could still predict it correctly. 
 
 2.) 
 <div style="display:flex;flex-direction:row">
@@ -255,13 +257,13 @@ Jupyter notebook demo:
 -------------------------
 # Dicussion
 
-Our proposed solution, which involved upsampling with Nearest Neighbor interpolation, showed better consistency compared to two of the three prior works. However, the current state-of-the-art solution, APS, still had the best consistency among all methods.
+Our proposed solution, which involved upsampling with NN interpolation, showed better consistency compared to two of the three prior works. However, the current state-of-the-art solution, APS, still had the best consistency among all methods.
 
-Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method could help to reduce such issue. Also, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to these two works. Compare to the the adaptive LPF method which introduces extra learnable parameters to the network, leading to increased training time and a more complex network. In contrast, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
+Our proposed solution addresses certain limitations of prior works. Unlike the traditional LPF method, which tends to over-blur some of the desired high frequency content, our method could help to reduce such issue. Also, our proposed solution with Nearest Neighbor interpolation upsampling has better consistency as compared to LPF, adaptive LPF and our implementation BI. Compare to the the adaptive LPF method which introduces extra learnable parameters to the network, leading to increased training time and a more complex network. In contrast, our approach does not require any additional learnable parameters as the upsampling with interpolation is treated as an operation, resulting in faster training of the model.
 
 In theory, we expect that our approach should be as robust as the APS method. Since the use of circular padding for generating the shifted images may introduce boundary effects. By utilizing interpolation, we hope would be able to alleviate such effect. By doing so, we aim to ensure that our approach can provide high-quality results even in the presence of shifted images. However, after running experiments our method has slightly less consistency as compared to APS.
 
-Our results show that our proposed methods had slightly lower accuracy compared to other methods. While this finding is important, further investigation is needed to identify the specific reasons for this difference in performance. It is possible that the use of Nearest Neighbor interpolation for upsampling may be more sensitive to certain types of noise or distortions. We plan to explore these factors in future work to better understand the limitations of our approach and identify opportunities for further improvement.
+Our results show that our proposed methods had slightly lower accuracy compared to other methods. While this finding is important, further investigation is needed to identify the specific reasons for this difference in performance. It is possible that the use of BI and NN interpolation for upsampling may be more sensitive to certain types of noise or distortions. We plan to explore these factors in future work to better understand the limitations of our approach and identify opportunities for further improvement.
 
 
 -------------------------
@@ -269,7 +271,7 @@ Our results show that our proposed methods had slightly lower accuracy compared 
 
 1.) Limited access to computing resources posed an additional challenge during the training of both the baseline methods and our proposed model, especially if we want to train with larger dataset such as ImageNet.
 
-2.) We encountered an unexpected challenge when our experiments revealed that Nearest Neighbor outperformed our initial assumption that Bilinear Interpolation would yield better results. This required a detailed analysis to understand the underlying reasons for the outcome.
+2.) We encountered an unexpected challenge when our experiments revealed that NN outperformed our initial assumption that BI would yield better results. This required a detailed analysis to understand the underlying reasons for the outcome.
 
 3.) We still face the issue of the the drop in accuracy comparing to other baseline methods such as LPF.    
 
@@ -296,14 +298,16 @@ Our results show that our proposed methods had slightly lower accuracy compared 
 
 -------------------------
 # Reference 
-1.) Zhang, Richard. "Making Convolutional Networks Shift-Invariant Again." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 14205-14214.
+1.) Azulay, Aharon and Weiss, Yair. Why do deep convolutional networks generalize so poorly to small image transformations? JMLR, 2019.
 
-2.) Zou, Xueyan, et al. "Delving Deeper into Anti-Aliasing in ConvNets." Proceedings of the IEEE International Conference on Computer Vision, 2022, pp 1-15.
+2.) Zhang, Richard. "Making Convolutional Networks Shift-Invariant Again." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 14205-14214.
 
-3.) Chaman, Anadi, and Ivan Dokmanic. “Truly Shift Invariant Convolutional Neural Networks.”2021IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
+3.) Zou, Xueyan, et al. "Delving Deeper into Anti-Aliasing in ConvNets." Proceedings of the IEEE International Conference on Computer Vision, 2022, pp 1-15.
 
-4.) Sharifzadeh, Mostafa,et al. “Investigating Shift-Variance of Convolutional Neural Networks in Ultrasound Image Segmentation”, IEEE IUS, 2021.
+4.) Chaman, Anadi, and Ivan Dokmanic. “Truly Shift Invariant Convolutional Neural Networks.”2021IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
 
-5.) Proakis, John G. Digital Signal Processing. Pearson, 2013.
+5.) Sharifzadeh, Mostafa,et al. “Investigating Shift-Variance of Convolutional Neural Networks in Ultrasound Image Segmentation”, IEEE IUS, 2021.
+
+6.) Proakis, John G. Digital Signal Processing. Pearson, 2013.
 
 
