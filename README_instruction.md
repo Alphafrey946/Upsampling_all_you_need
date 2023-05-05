@@ -1,8 +1,18 @@
+# Dependencies
+Test with
+Python 3.8.8
+CUDA 11.6
+Pythorch 1.10.2
+torchvision 0.11.3
+numpy
+opencv
+seaborn
+matplotlib
+
 # Instruction on how to run
 The code is adopted from [Truly shift-invariant convolutional neural networks](https://github.com/achaman2/truly_shift_invariant_cnns/) by Anadi Chaman and Ivan Dokmanić. 
 This code is specific for training cifar-10. 
 ## Training 
-
 
 ```python
 python3 main.py --arch ARCH --filter_size j --validate_consistency --seed_num 0 --device_id 0 --model_folder CURRENT_MODEL_DIRECTORY --results_root_path ROOT_DIRECTORY --dataset_path PATH-TO-DATASET
