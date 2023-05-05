@@ -23,8 +23,8 @@ As previously mentioned, the shift variance exhibited by CNNs can pose a signifi
 
 Shown above are two images of a squirrel: the image on the left is a non-shifted image, while the image on the right is slightly shifted. The rightmost picture is a GIF that shows the two images. If we apply a CNN classifier to these images, it will produce different results, depending on whether the image is shifted or not.
 <div style="display:flex;flex-direction:row">
-    <img src="https://user-images.githubusercontent.com/55200955/235745127-abcf3404-ec8f-4d9c-b25a-434290794992.png" width="200" />
-    <img src="https://user-images.githubusercontent.com/55200955/235745156-59f04fe3-12d7-4d80-992c-59daa2090ae8.png" width="220" />
+    <img src="https://user-images.githubusercontent.com/55200955/235745127-abcf3404-ec8f-4d9c-b25a-434290794992.png" width="300" />
+    <img src="https://user-images.githubusercontent.com/55200955/235745156-59f04fe3-12d7-4d80-992c-59daa2090ae8.png" width="340" />
   <br>
   <em>[Xueyan, 2020]</em>
 
@@ -36,6 +36,8 @@ Above was a simple image classfier. Now, we can consider an application which do
 
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/236338089-a358f8b6-bcae-4b0c-b1e7-5e6fa07edbcb.png" alt="ultrasoundimg" width="250"/>
+  <br>
+  <em>[Sharifzadeh, 2021] <em>
 </p>
 
 Above, we can see that slightly shifted ultrasound images produced different results. Hence, it becomes matter of concern in high stake applications. 
