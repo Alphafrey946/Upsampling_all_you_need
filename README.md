@@ -37,7 +37,7 @@ Above was a simple image classfier. Now, we can consider an application which do
  <p align="center">
   <img src="https://user-images.githubusercontent.com/55200955/236338089-a358f8b6-bcae-4b0c-b1e7-5e6fa07edbcb.png" alt="ultrasoundimg" width="250"/>
   <br>
-  <em>[Sharifzadeh, 2021] <em>
+  <em>[Sharifzadeh, 2021] </em>
 </p>
 
 Above, we can see that slightly shifted ultrasound images produced different results. Hence, it becomes matter of concern in high stake applications. 
